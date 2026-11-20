@@ -1,8 +1,9 @@
-APP     := Coffee.app
-BUILD   := build
-INSTALL := $(HOME)/Applications
+APP       := Coffee.app
+BUILD     := build
+INSTALL   := $(HOME)/Applications
+FUNCTIONS := $(HOME)/.config/fish/functions
 
-.PHONY: build install run clean
+.PHONY: build install uninstall run clean
 
 build: $(BUILD)/$(APP)
 
@@ -15,10 +16,16 @@ $(BUILD)/$(APP): Coffee.swift Info.plist
 
 install: build
 	-pkill -x Coffee
-	mkdir -p $(INSTALL)
+	mkdir -p $(INSTALL) $(FUNCTIONS)
 	rm -rf $(INSTALL)/$(APP)
 	cp -R $(BUILD)/$(APP) $(INSTALL)/$(APP)
+	cp coffee.fish $(FUNCTIONS)/coffee.fish
 	open $(INSTALL)/$(APP)
+
+uninstall:
+	-pkill -x Coffee
+	rm -rf $(INSTALL)/$(APP)
+	rm -f $(FUNCTIONS)/coffee.fish
 
 run: build
 	open $(BUILD)/$(APP)

@@ -7,10 +7,12 @@ Command Line Tools; nothing else is required.
 ```sh
 make install         # build and install every utility
 make coffee          # build and install one
+make uninstall
 make clean
 ```
 
-Apps install to `~/Applications`.
+Apps install to `~/Applications`; fish functions install to
+`~/.config/fish/functions`.
 
 ## Utilities
 
@@ -31,6 +33,18 @@ remaining beside it when a limit is set. The menu offers:
 - **Launch at Login**
 
 Quitting the app releases the assertions and lets the Mac sleep normally.
+
+The same switch is available in the terminal as the fish function `coffee`:
+
+```sh
+coffee              # indefinitely
+coffee -d 1.5       # for 1.5 hours
+coffee -t 5:00pm    # until 5:00 PM (also 5pm, 17:00)
+```
+
+It shows a single status line that updates in place. Press `q` to stop, `a` to
+add time (`2` for two hours, `1:30` for an hour and a half), or `c` to change the
+end time. Closing the terminal also stops it.
 
 ## License
 
